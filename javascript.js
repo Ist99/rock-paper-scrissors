@@ -1,73 +1,28 @@
-function getComputerChoice(choices) {
-    return choices[(Math.floor(Math.random()*3))];
+function getComputerChoice(computerChoices) {
+    return computerChoices[(Math.floor(Math.random()*3))];
 }
 
-let choices = ['rock', 'paper', 'scrissors'];
+let computerChoices = ['rock', 'paper', 'scrissors'];
+let playerChoices = ['scrissors', 'rock', 'paper'];
 
 let a = 0;
 let b = 0;
 
 
-
-function playRound(computerSelection, playerSelection) {
-
-    if (playerSelection.toLowerCase() == 'rock') {
-        if (computerSelection == 'rock') {
-            div2.textContent = 'Draw';
-        }
-        else if (computerSelection == 'paper') {
-            div2.textContent = 'Loser! Paper beats rock! Muhahahahhhahahaha!';
-            ++b;
-        }     
-        else {
-            div2.textContent = 'You won! Rock beats scrissors!';
-            ++a;
-        }
-    }
-
-    else if (playerSelection.toLowerCase() == 'paper') {
-        if (computerSelection == 'paper') {
-            div2.textContent = 'Draw';
-        }
-        else if (computerSelection == 'scrissors') {
-            div2.textContent = 'Loser! Scrissors beats paper! Muhahahahhhahahaha!';
-            ++b;
-        }     
-        else {
-            div2.textContent = 'You won! Paper beats rock!';
-            ++a;
-        }
-}
-
-    else if (playerSelection.toLowerCase() == 'scrissors') {
-        if (computerSelection == 'scrissors') {
-            div2.textContent = 'Draw';
-    }
-        else if (computerSelection == 'rock') {
-            div2.textContent = 'Loser! Rock beats scrissors! Muhahahahhhahahaha!';
-            ++b;
-        }     
-        else {
-            div2.textContent = 'You won! Scrissors beats paper!';
-            ++a;
-        }
-}
-
-div1.textContent = a + ' : ' + b;
-
-setTimeout (function () {
-    if (a == 5) {
-        div2.textContent = "YOU WON! " + a + ' : ' + b + "! PLAY AGAIN?";
-        a = 0; 
-        b = 0;
+function playRound (computerSelection, playerSelection) {
+    let x = computerChoices.indexOf(computerSelection);
+    let y = playerChoices.indexOf(playerSelection);
+    if (computerSelection == playerSelection) {
+        div2.textContent = 'Draw';
+    } else if (x !== y) {
+        div2.textContent = 'You won this round! ' + playerChoices[y].toUpperCase() + ' beats ' + computerChoices[x].toUpperCase() + '!';
+        ++a;
         div1.textContent = a + ' : ' + b;
-    } else if (b == 5) {
-        div2.textContent = "YOU LOST! " + a + ' : ' + b + "! PLAY AGAIN?";
-        a = 0;
-        b = 0;
+    } else {
+        div2.textContent = 'Loser! ' + computerChoices[x].toUpperCase() + ' beats ' + playerChoices[y].toUpperCase() + '!';
+        ++b;
         div1.textContent = a + ' : ' + b;
-        };
-    }, 1000) 
+    }
 }
 
 
@@ -90,14 +45,46 @@ div2 = document.createElement('div');
 document.body.appendChild(div2);
 div2.textContent = "START!";
 
+function finalOfGame(playerWin) {
+    if (playerWin) {
+        div2.textContent = "YOU WON! " + a + ' : ' + b + "! PLAY AGAIN?";
+        a = 0; 
+        b = 0;
+        div1.textContent = a + ' : ' + b;
+    } else {
+        div2.textContent = "YOU LOST! " + a + ' : ' + b + "! PLAY AGAIN?";
+        a = 0;
+        b = 0;
+        div1.textContent = a + ' : ' + b;
+        };
+}
+
 btn1.addEventListener("click", function() {
-    playRound(getComputerChoice(choices), 'rock');
+    playRound(getComputerChoice(computerChoices), 'rock');
+    if (a == 5) {
+        finalOfGame(true);
+    }
+    else if (b == 5) {
+        finalOfGame(false);
+    }
 });
 
 btn2.addEventListener("click", function() {
-    playRound(getComputerChoice(choices), 'paper');
+    playRound(getComputerChoice(computerChoices), 'paper');
+    if (a == 5) {
+        finalOfGame(true);
+    }
+    else if (b == 5) {
+        finalOfGame(false);
+    }
 });
 
 btn3.addEventListener("click", function() {
-    playRound(getComputerChoice(choices), 'scrissors');
+    playRound(getComputerChoice(computerChoices), 'scrissors');
+    if (a == 5) {
+        finalOfGame(true);
+    }
+    else if (b == 5) {
+        finalOfGame(false);
+    }
 });
