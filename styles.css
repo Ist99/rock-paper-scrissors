@@ -4,6 +4,10 @@ body {
     background-color: azure;
 }
 
+h1 {
+    text-align: center;
+}
+
 body
  {
     display: flex;
@@ -16,6 +20,7 @@ body
     display: flex;
     width: 100%;
     justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
 button {
