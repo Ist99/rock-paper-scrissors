@@ -6,6 +6,7 @@ body {
 
 h1 {
     text-align: center;
+    height: auto;
 }
 
 body
@@ -45,5 +46,7 @@ button:nth-of-type(3) {
 div {
     font-size: 36px;
     font-weight: 800;
+    text-align: center;
+    height: auto;
 }
 
